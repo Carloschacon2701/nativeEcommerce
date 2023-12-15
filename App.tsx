@@ -10,6 +10,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 
 import HelloWorld from './src/screens/HelloWorld';
+import {Login} from './src/screens/Authentication/Login';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,13 +18,11 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Login"
         screenOptions={{
-          headerStyle: {
-            backgroundColor: '#f4511e',
-          },
+          headerShown: false,
         }}>
-        <Stack.Screen name="Home" component={HelloWorld} />
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="pepe" component={HelloWorld} />
       </Stack.Navigator>
     </NavigationContainer>
