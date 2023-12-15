@@ -1,43 +1,42 @@
-/* eslint-disable react-native/no-inline-styles */
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {InputWithLabel} from '../../components/Inputs/InputWithLabel';
 import Icon from 'react-native-vector-icons/FontAwesome6';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {InputWithLabel} from '../../components/Inputs/InputWithLabel';
 import {RootStackParamList} from '../../utils/types/types';
 
-type Navigation = NavigationProp<RootStackParamList, 'Login'>;
+type Navigation = NavigationProp<RootStackParamList, 'Register'>;
 
-export const Login = (): React.JSX.Element => {
-  const {navigate} = useNavigation<Navigation>();
+export const Register = (): React.JSX.Element => {
+  const {goBack} = useNavigation<Navigation>();
 
-  const handleRegister = () => {
-    navigate('Register');
+  const handleGoBack = () => {
+    goBack();
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <TouchableOpacity onPress={handleGoBack}>
+        <Text>Go Back</Text>
+      </TouchableOpacity>
+      <Text style={styles.title}>Register</Text>
       <View style={styles.secondContainer}>
         <InputWithLabel label="Email" iconName="email" />
         <InputWithLabel label="Password" iconName="password" />
-        <Text style={styles.forgotPassword}>Forgot your password?</Text>
+        <InputWithLabel label="Confirm Password" iconName="password" />
 
-        <TouchableOpacity style={styles.loginButton}>
-          <Text style={{color: 'white'}}>Login</Text>
+        <TouchableOpacity style={styles.registerButton}>
+          <Text style={{color: 'white'}}>Register</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.otherLoginMethods}>
-        <Text>Or login with</Text>
+      <View style={styles.otherRegisterMethods}>
+        <Text>Or register with</Text>
         <View style={styles.socialMediaContainer}>
           <Icon name="github" style={styles.icons} />
           <Icon name="facebook" style={styles.icons} />
           <Icon name="google" style={styles.icons} />
         </View>
       </View>
-      <TouchableOpacity onPress={handleRegister}>
-        <Text style={styles.registerButton}>Register</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  loginButton: {
+  registerButton: {
     backgroundColor: '#343436',
     width: '100%',
     height: 40,
@@ -75,16 +74,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  registerButton: {
-    fontWeight: '800',
-  },
-
-  forgotPassword: {
-    textAlign: 'right',
-    width: '100%',
-  },
-
-  otherLoginMethods: {
+  otherRegisterMethods: {
     textAlign: 'center',
     width: '100%',
     flexDirection: 'column',
