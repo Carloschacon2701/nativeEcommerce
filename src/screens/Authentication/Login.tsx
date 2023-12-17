@@ -1,10 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {InputWithLabel} from '../../components/Inputs/InputWithLabel';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../utils/types/types';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 type Navigation = NavigationProp<RootStackParamList, 'Login'>;
 
@@ -13,6 +14,24 @@ export const Login = (): React.JSX.Element => {
 
   const handleRegister = () => {
     navigate('Register');
+  };
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '125332911005-4imduhd2uphsejvraug14ni8cucfj53u.apps.googleusercontent.com',
+    });
+    console.log('Google Signin configured');
+  }, []);
+
+  const handleGoogleLogin = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log(userInfo);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -30,7 +49,9 @@ export const Login = (): React.JSX.Element => {
       <View style={styles.otherLoginMethods}>
         <Text>Or login with</Text>
         <View style={styles.socialMediaContainer}>
-          <Icon name="github" style={styles.icons} />
+          <TouchableOpacity onPress={handleGoogleLogin}>
+            <Icon name="github" style={styles.icons} />
+          </TouchableOpacity>
           <Icon name="facebook" style={styles.icons} />
           <Icon name="google" style={styles.icons} />
         </View>

@@ -16,8 +16,8 @@ export const Register = (): React.JSX.Element => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleGoBack}>
-        <Text>Go Back</Text>
+      <TouchableOpacity style={styles.goBackButton} onPress={handleGoBack}>
+        <Icon name="angle-left" />
       </TouchableOpacity>
       <Text style={styles.title}>Register</Text>
       <View style={styles.secondContainer}>
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     gap: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
   },
 
   secondContainer: {
@@ -81,6 +82,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
+  },
+
+  goBackButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
   },
 
   socialMediaContainer: {
