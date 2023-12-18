@@ -12,8 +12,8 @@ export const InputWithLabel = ({label, iconName}: InputWithLabelProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.label}>
-        <Icon name={iconName} />
-        <Text>{label}</Text>
+        <Icon style={styles.labelText} name={iconName} />
+        <Text style={styles.labelText}>{label}</Text>
       </View>
 
       <TextInput placeholder={label} style={styles.input} />
@@ -27,11 +27,18 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: 6,
   },
+
   label: {
     flexDirection: 'row',
     gap: 6,
     alignItems: 'center',
   },
+
+  labelText: {
+    fontWeight: '700',
+    color: '#343436',
+  },
+
   input: {
     width: '100%',
     height: 40,
