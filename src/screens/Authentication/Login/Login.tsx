@@ -1,28 +1,33 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {InputWithLabel} from '../../components/Inputs/InputWithLabel';
+import {
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {InputWithLabel} from '../../../components/Inputs/InputWithLabel';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from '../../utils/types/types';
+import {RootStackParamList} from '../../../utils/types/types';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+import {useQuery} from 'react-query';
+import { AuthServices } from '../../../utils/services/AuthServices';
 
 type Navigation = NavigationProp<RootStackParamList, 'Login'>;
 
 export const Login = (): React.JSX.Element => {
   const {navigate} = useNavigation<Navigation>();
+  const {} = useQuery({
+    queryKey: ['googleLogin'],
+    queryFn: 
+  });
 
   const handleRegister = () => {
     navigate('Register');
   };
-
-  useEffect(() => {
-    GoogleSignin.configure({
-      webClientId:
-        '125332911005-4imduhd2uphsejvraug14ni8cucfj53u.apps.googleusercontent.com',
-    });
-    console.log('Google Signin configured');
-  }, []);
 
   const handleGoogleLogin = async () => {
     try {
@@ -36,7 +41,7 @@ export const Login = (): React.JSX.Element => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../../Images/logo.png')} style={styles.logo} />
+      <Image source={require('../../../Images/logo.png')} style={styles.logo} />
       <Text style={styles.title}>Login</Text>
       <View style={styles.secondContainer}>
         <InputWithLabel label="Email" iconName="email" />
@@ -61,14 +66,15 @@ export const Login = (): React.JSX.Element => {
           <Text style={styles.registerButton}>Register</Text>
         </TouchableOpacity>
       </View>
+      <ActivityIndicator size="small" color="rgba(193,90,188,1)" />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   logo: {
-    width: 110,
-    height: 120,
+    width: 120,
+    height: 130,
   },
 
   container: {
@@ -98,8 +104,7 @@ const styles = StyleSheet.create({
   },
 
   loginButton: {
-    backgroundColor:
-      'linear-gradient(90deg, rgba(229,132,74,1) 0%, rgba(227,119,131,1) 35%, rgba(193,90,188,1) 100%)',
+    backgroundColor: 'rgba(193,90,188,1)',
     width: '100%',
     height: 40,
     borderRadius: 10,
