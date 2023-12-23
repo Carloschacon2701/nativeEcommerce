@@ -2,8 +2,8 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
-import {InputWithLabel} from '../../components/Inputs/InputWithLabel';
-import {RootStackParamList} from '../../utils/types/types';
+import {InputWithLabel} from '../../../components/Inputs/InputWithLabel';
+import {RootStackParamList} from '../../../utils/types/types';
 
 type Navigation = NavigationProp<RootStackParamList, 'Register'>;
 

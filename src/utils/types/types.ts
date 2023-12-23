@@ -1,6 +1,7 @@
 export type RootStackParamList = {
   Register: undefined;
   Login: undefined;
+  Welcome: undefined;
 };
 
 export type authResponse = {

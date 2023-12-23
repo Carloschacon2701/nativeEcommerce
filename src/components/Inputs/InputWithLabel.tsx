@@ -35,14 +35,14 @@ const styles = StyleSheet.create({
   },
 
   labelText: {
-    fontWeight: '700',
+    fontWeight: '500',
     color: '#343436',
   },
 
   input: {
     width: '100%',
     height: 40,
-    borderColor: 'gray',
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 10,

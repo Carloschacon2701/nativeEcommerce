@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
-  ActivityIndicator,
   Image,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -14,7 +14,6 @@ import {RootStackParamList} from '../../../utils/types/types';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import {useQuery} from 'react-query';
-import { AuthServices } from '../../../utils/services/AuthServices';
 
 type Navigation = NavigationProp<RootStackParamList, 'Login'>;
 
@@ -22,7 +21,7 @@ export const Login = (): React.JSX.Element => {
   const {navigate} = useNavigation<Navigation>();
   const {} = useQuery({
     queryKey: ['googleLogin'],
-    queryFn: 
+    queryFn: () => {},
   });
 
   const handleRegister = () => {
@@ -40,58 +39,72 @@ export const Login = (): React.JSX.Element => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image source={require('../../../Images/logo.png')} style={styles.logo} />
-      <Text style={styles.title}>Login</Text>
-      <View style={styles.secondContainer}>
-        <InputWithLabel label="Email" iconName="email" />
-        <InputWithLabel label="Password" iconName="password" />
-        <Text style={styles.forgotPassword}>Forgot your password?</Text>
-        <TouchableOpacity style={styles.loginButton}>
-          <Text style={{color: 'white'}}>Login</Text>
-        </TouchableOpacity>
+    <>
+      <StatusBar backgroundColor="#f4f8fb" barStyle="dark-content" />
+      <View style={styles.container}>
+        <Image
+          source={require('../../../Images/login.png')}
+          style={styles.logo}
+        />
+        <View style={styles.roundedContainer}>
+          <View style={styles.secondContainer}>
+            <InputWithLabel label="Email" iconName="email" />
+            <InputWithLabel label="Password" iconName="password" />
+            <Text style={styles.forgotPassword}>Forgot your password?</Text>
+            <TouchableOpacity style={styles.loginButton}>
+              <Text style={{color: 'white', fontWeight: 'bold'}}>Login</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.otherLoginMethods}>
+            <Text>Or</Text>
+            <TouchableOpacity
+              style={styles.googleButton}
+              onPress={handleGoogleLogin}>
+              <Icon name="google" />
+              <Text>Google</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.footer}>
+            <Text>Don't have an account?</Text>
+            <TouchableOpacity onPress={handleRegister}>
+              <Text style={styles.registerButton}>Register</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
-      <View style={styles.otherLoginMethods}>
-        <Text>Or login with</Text>
-        <TouchableOpacity
-          style={styles.googleButton}
-          onPress={handleGoogleLogin}>
-          <Icon name="google" />
-          <Text>Google</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.footer}>
-        <Text>Don't have an account?</Text>
-        <TouchableOpacity onPress={handleRegister}>
-          <Text style={styles.registerButton}>Register</Text>
-        </TouchableOpacity>
-      </View>
-      <ActivityIndicator size="small" color="rgba(193,90,188,1)" />
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   logo: {
-    width: 120,
+    width: '70%',
     height: 130,
+    flex: 1,
   },
 
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#f4f8fb',
     flex: 1,
     gap: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
 
-  secondContainer: {
+  roundedContainer: {
+    paddingTop: 60,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    width: '100%',
     backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '80%',
+    flex: 2,
     flexDirection: 'column',
-    position: 'relative',
+    gap: 15,
+    alignItems: 'center',
+  },
+
+  secondContainer: {
+    width: '80%',
     gap: 25,
   },
 
@@ -104,7 +117,7 @@ const styles = StyleSheet.create({
   },
 
   loginButton: {
-    backgroundColor: 'rgba(193,90,188,1)',
+    backgroundColor: '#ff7d73',
     width: '100%',
     height: 40,
     borderRadius: 10,
@@ -130,7 +143,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 5,
+    gap: 10,
   },
 
   googleButton: {
@@ -149,5 +162,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 40,
     alignItems: 'center',
+    flexDirection: 'row',
+    gap: 5,
   },
 });
